@@ -150,86 +150,130 @@ void test_neon(
 	vst4q_u32(&src[64], b);
 }
 
+void test_neon_setup(
+  const uint32_t * restrict src)
+{
+	__asm__ volatile( "ldr x0, [%0]\n\t" ::"r"(src));
+	__asm__ volatile( "add x1, x0, 64\n\t");
+	__asm__ volatile( "add x2, x1, 64\n\t");
+	__asm__ volatile( "add x3, x2, 64\n\t");
+	__asm__ volatile( "add x4, x3, 64\n\t");
+	__asm__ volatile( "add x5, x4, 64\n\t");
+	__asm__ volatile( "add x6, x5, 64\n\t");
+}
+
+
 
 void test_neon_assembly(
   const uint32_t * restrict src)
 {
 	__asm__ volatile( "ldr x0, [%0]\n\t" ::"r"(&src));
+	__asm__ volatile( "add x1, x0, 64\n\t");
+	__asm__ volatile( "add x2, x1, 64\n\t");
+	__asm__ volatile( "add x3, x2, 64\n\t");
+	__asm__ volatile( "add x4, x3, 64\n\t");
+	__asm__ volatile( "add x5, x4, 64\n\t");
+	__asm__ volatile( "add x6, x5, 64\n\t");
 
 	__asm__ volatile(".loop:\n\t"
 	"ld1	{v0.16b-v3.16b}, [x0], 64\n\t"
-	"ld1	{v4.16b-v7.16b}, [x0], 64\n\t"
-	"ld1	{v8.16b-v11.16b}, [x0], 64\n\t"
-	"ld1	{v12.16b-v15.16b}, [x0], 64\n\t"
-	"ld1	{v16.16b-v19.16b}, [x0], 64\n\t"
-	"ld1	{v20.16b-v23.16b}, [x0], 64\n\t"
-	"ld1	{v24.16b-v27.16b}, [x0], 64\n\t"
+	"ld1	{v4.16b-v7.16b}, [x1], 64\n\t"
+	"ld1	{v8.16b-v11.16b}, [x2], 64\n\t"
+	"ld1	{v12.16b-v15.16b}, [x3], 64\n\t"
+	"ld1	{v16.16b-v19.16b}, [x4], 64\n\t"
+	"ld1	{v20.16b-v23.16b}, [x5], 64\n\t"
+	"ld1	{v24.16b-v27.16b}, [x6], 64\n\t"
 
 	"st1	{v0.16b-v3.16b}, [x0], 64\n\t"
-	"st1	{v4.16b-v7.16b}, [x0], 64\n\t"
-	"st1	{v8.16b-v11.16b}, [x0], 64\n\t"
-	"st1	{v12.16b-v15.16b}, [x0], 64\n\t"
-	"st1	{v16.16b-v19.16b}, [x0], 64\n\t"
-	"st1	{v20.16b-v23.16b}, [x0], 64\n\t"
-	"st1	{v24.16b-v27.16b}, [x0], 64\n\t"
+	"st1	{v4.16b-v7.16b}, [x1], 64\n\t"
+	"st1	{v8.16b-v11.16b}, [x2], 64\n\t"
+	"st1	{v12.16b-v15.16b}, [x3], 64\n\t"
+	"st1	{v16.16b-v19.16b}, [x4], 64\n\t"
+	"st1	{v20.16b-v23.16b}, [x5], 64\n\t"
+	"st1	{v24.16b-v27.16b}, [x6], 64\n\t"
 
 	"st1	{v0.16b-v3.16b}, [x0], 64\n\t"
-	"st1	{v4.16b-v7.16b}, [x0], 64\n\t"
-	"st1	{v8.16b-v11.16b}, [x0], 64\n\t"
-	"st1	{v12.16b-v15.16b}, [x0], 64\n\t"
-	"st1	{v16.16b-v19.16b}, [x0], 64\n\t"
-	"st1	{v20.16b-v23.16b}, [x0], 64\n\t"
-	"st1	{v24.16b-v27.16b}, [x0], 64\n\t"
+	"st1	{v4.16b-v7.16b}, [x1], 64\n\t"
+	"st1	{v8.16b-v11.16b}, [x2], 64\n\t"
+	"st1	{v12.16b-v15.16b}, [x3], 64\n\t"
+	"st1	{v16.16b-v19.16b}, [x4], 64\n\t"
+	"st1	{v20.16b-v23.16b}, [x5], 64\n\t"
+	"st1	{v24.16b-v27.16b}, [x6], 64\n\t"
 
 	"st1	{v0.16b-v3.16b}, [x0], 64\n\t"
-	"st1	{v4.16b-v7.16b}, [x0], 64\n\t"
-	"st1	{v8.16b-v11.16b}, [x0], 64\n\t"
-	"st1	{v12.16b-v15.16b}, [x0], 64\n\t"
-	"st1	{v16.16b-v19.16b}, [x0], 64\n\t"
-	"st1	{v20.16b-v23.16b}, [x0], 64\n\t"
-	"st1	{v24.16b-v27.16b}, [x0], 64\n\t"
+	"st1	{v4.16b-v7.16b}, [x1], 64\n\t"
+	"st1	{v8.16b-v11.16b}, [x2], 64\n\t"
+	"st1	{v12.16b-v15.16b}, [x3], 64\n\t"
+	"st1	{v16.16b-v19.16b}, [x4], 64\n\t"
+	"st1	{v20.16b-v23.16b}, [x5], 64\n\t"
+	"st1	{v24.16b-v27.16b}, [x6], 64\n\t"
 
 	"st1	{v0.16b-v3.16b}, [x0], 64\n\t"
-	"st1	{v4.16b-v7.16b}, [x0], 64\n\t"
-	"st1	{v8.16b-v11.16b}, [x0], 64\n\t"
-	"st1	{v12.16b-v15.16b}, [x0], 64\n\t"
-	"st1	{v16.16b-v19.16b}, [x0], 64\n\t"
-	"st1	{v20.16b-v23.16b}, [x0], 64\n\t"
-	"st1	{v24.16b-v27.16b}, [x0], 64\n\t"
+	"st1	{v4.16b-v7.16b}, [x1], 64\n\t"
+	"st1	{v8.16b-v11.16b}, [x2], 64\n\t"
+	"st1	{v12.16b-v15.16b}, [x3], 64\n\t"
+	"st1	{v16.16b-v19.16b}, [x4], 64\n\t"
+	"st1	{v20.16b-v23.16b}, [x5], 64\n\t"
+	"st1	{v24.16b-v27.16b}, [x6], 64\n\t"
 
 	"st1	{v0.16b-v3.16b}, [x0], 64\n\t"
-	"st1	{v4.16b-v7.16b}, [x0], 64\n\t"
-	"st1	{v8.16b-v11.16b}, [x0], 64\n\t"
-	"st1	{v12.16b-v15.16b}, [x0], 64\n\t"
-	"st1	{v16.16b-v19.16b}, [x0], 64\n\t"
-	"st1	{v20.16b-v23.16b}, [x0], 64\n\t"
-	"st1	{v24.16b-v27.16b}, [x0], 64\n\t"
+	"st1	{v4.16b-v7.16b}, [x1], 64\n\t"
+	"st1	{v8.16b-v11.16b}, [x2], 64\n\t"
+	"st1	{v12.16b-v15.16b}, [x3], 64\n\t"
+	"st1	{v16.16b-v19.16b}, [x4], 64\n\t"
+	"st1	{v20.16b-v23.16b}, [x5], 64\n\t"
+	"st1	{v24.16b-v27.16b}, [x6], 64\n\t"
 
 	"st1	{v0.16b-v3.16b}, [x0], 64\n\t"
-	"st1	{v4.16b-v7.16b}, [x0], 64\n\t"
-	"st1	{v8.16b-v11.16b}, [x0], 64\n\t"
-	"st1	{v12.16b-v15.16b}, [x0], 64\n\t"
-	"st1	{v16.16b-v19.16b}, [x0], 64\n\t"
-	"st1	{v20.16b-v23.16b}, [x0], 64\n\t"
-	"st1	{v24.16b-v27.16b}, [x0], 64\n\t"
+	"st1	{v4.16b-v7.16b}, [x1], 64\n\t"
+	"st1	{v8.16b-v11.16b}, [x2], 64\n\t"
+	"st1	{v12.16b-v15.16b}, [x3], 64\n\t"
+	"st1	{v16.16b-v19.16b}, [x4], 64\n\t"
+	"st1	{v20.16b-v23.16b}, [x5], 64\n\t"
+	"st1	{v24.16b-v27.16b}, [x6], 64\n\t"
 
-	"st1	{v0.16b-v3.16b}, [x0], 64\n\t"
-	"st1	{v4.16b-v7.16b}, [x0], 64\n\t"
-	"st1	{v8.16b-v11.16b}, [x0], 64\n\t"
-	"st1	{v12.16b-v15.16b}, [x0], 64\n\t"
-	"st1	{v16.16b-v19.16b}, [x0], 64\n\t"
-	"st1	{v20.16b-v23.16b}, [x0], 64\n\t"
-	"st1	{v24.16b-v27.16b}, [x0], 64\n\t"
+			"st1	{v0.16b-v3.16b}, [x0], 64\n\t"
+			"st1	{v4.16b-v7.16b}, [x1], 64\n\t"
+			"st1	{v8.16b-v11.16b}, [x2], 64\n\t"
+			"st1	{v12.16b-v15.16b}, [x3], 64\n\t"
+			"st1	{v16.16b-v19.16b}, [x4], 64\n\t"
+			"st1	{v20.16b-v23.16b}, [x5], 64\n\t"
+			"st1	{v24.16b-v27.16b}, [x6], 64\n\t"
+
+			"st1	{v0.16b-v3.16b}, [x0], 64\n\t"
+			"st1	{v4.16b-v7.16b}, [x1], 64\n\t"
+			"st1	{v8.16b-v11.16b}, [x2], 64\n\t"
+			"st1	{v12.16b-v15.16b}, [x3], 64\n\t"
+			"st1	{v16.16b-v19.16b}, [x4], 64\n\t"
+			"st1	{v20.16b-v23.16b}, [x5], 64\n\t"
+			"st1	{v24.16b-v27.16b}, [x6], 64\n\t"
+
+			"st1	{v0.16b-v3.16b}, [x0], 64\n\t"
+			"st1	{v4.16b-v7.16b}, [x1], 64\n\t"
+			"st1	{v8.16b-v11.16b}, [x2], 64\n\t"
+			"st1	{v12.16b-v15.16b}, [x3], 64\n\t"
+			"st1	{v16.16b-v19.16b}, [x4], 64\n\t"
+			"st1	{v20.16b-v23.16b}, [x5], 64\n\t"
+			"st1	{v24.16b-v27.16b}, [x6], 64\n\t"
+
+			"st1	{v0.16b-v3.16b}, [x0], 64\n\t"
+			"st1	{v4.16b-v7.16b}, [x1], 64\n\t"
+			"st1	{v8.16b-v11.16b}, [x2], 64\n\t"
+			"st1	{v12.16b-v15.16b}, [x3], 64\n\t"
+			"st1	{v16.16b-v19.16b}, [x4], 64\n\t"
+			"st1	{v20.16b-v23.16b}, [x5], 64\n\t"
+			"st1	{v24.16b-v27.16b}, [x6], 64\n\t"
+
+			"st1	{v0.16b-v3.16b}, [x0], 64\n\t"
+			"st1	{v4.16b-v7.16b}, [x1], 64\n\t"
+			"st1	{v8.16b-v11.16b}, [x2], 64\n\t"
+			"st1	{v12.16b-v15.16b}, [x3], 64\n\t"
+			"st1	{v16.16b-v19.16b}, [x4], 64\n\t"
+			"st1	{v20.16b-v23.16b}, [x5], 64\n\t"
+			"st1	{v24.16b-v27.16b}, [x6], 64\n\t"
 
 	);
 }
-/*
-	"addp	v8.4s,  v0.4s, v4.4s\n\t"
-	"addp	v9.4s,  v1.4s, v5.4s\n\t"
-	"addp	v10.4s, v2.4s, v6.4s\n\t"
-	"addp	v11.4s, v3.4s, v7.4s\n\t"
-*/
-
 int main()
 {
 	Xil_ICacheEnable();
