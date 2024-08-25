@@ -5,6 +5,8 @@ Notes:
 Asynchronous exceptions not taken in EL3 on Cortex A53 r0p2 and above #368
 https://github.com/ARM-software/tf-issues/issues/368
 
+Intel Cal algorithm
+https://www.intel.com/content/www/us/en/docs/programmable/683216/23-2-2-7-1/ddr4-read-calibration.html
 
 DDR Calibrations: 
 https://docs.amd.com/r/en-US/pg313-network-on-chip/Calibration-Stages
@@ -21,12 +23,18 @@ General concept:
 3) VREF causes eye degradation due to saturation. CAL is done by the 2d eye pattern.
 
 
-AC/ACD: Address/Command
-DFU: Device Firmware Update, or short DFU
-
+AC/ACD - Address/Command
+DFU - Device Firmware Update, or short DFU
+CA[5:0] - ACT_n, RAS_n, CAS_n, WE_n etc. (Table 84: Command Truth Table)
+DBM/I - Data bus mask, inversion
 
 VT compensation algorithm, maybe multiply by some ratio? 
 IPRD	8:0	rw	0x0	Initial Period: Initial period measured by the master delay line calibration
 for VT drift compensation. This value is used as the denominator when
 calculating the ratios of updates during VT compensation.
 
+Possible issues:
+data pin connectivity 
+cross talk
+dram timing parameters
+stability of the VTT/VCCIO power rail
