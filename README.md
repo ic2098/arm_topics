@@ -14,3 +14,13 @@ General concept:
 2) Terminations can cause issue with on the mis-alignment too due to reflections. Calibration is done by programming a ODT and calculate BER?
 3) VREF causes eye degradation due to saturation. CAL is done by the 2d eye pattern.
 
+
+AC/ACD: Address/Command
+DFU: Device Firmware Update, or short DFU
+
+
+VT compensation algorithm, maybe multiply by some ratio? 
+IPRD	8:0	rw	0x0	Initial Period: Initial period measured by the master delay line calibration
+for VT drift compensation. This value is used as the denominator when
+calculating the ratios of updates during VT compensation.
+
