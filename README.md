@@ -8,6 +8,8 @@ https://github.com/ARM-software/tf-issues/issues/368
 Intel Cal algorithm
 https://www.intel.com/content/www/us/en/docs/programmable/683216/23-2-2-7-1/ddr4-read-calibration.html
 
+https://docs.amd.com/r/en-US/pg313-network-on-chip/DQS-Gate?tocId=Bzs5pNe25cCF6MjyTRQgEA
+
 DDR Calibrations: 
 https://docs.amd.com/r/en-US/pg313-network-on-chip/Calibration-Stages
 <picture>
@@ -27,6 +29,8 @@ AC/ACD - Address/Command
 DFU - Device Firmware Update, or short DFU
 CA[5:0] - ACT_n, RAS_n, CAS_n, WE_n etc. (Table 84: Command Truth Table)
 DBM/I - Data bus mask, inversion
+ZQCS (ZQ calibration short)
+
 
 VT compensation algorithm, maybe multiply by some ratio? 
 IPRD	8:0	rw	0x0	Initial Period: Initial period measured by the master delay line calibration
@@ -38,3 +42,6 @@ data pin connectivity
 cross talk
 dram timing parameters
 stability of the VTT/VCCIO power rail
+
+
+Write Levelling
