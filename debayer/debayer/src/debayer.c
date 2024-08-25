@@ -169,11 +169,11 @@ void test_neon_assembly(
 {
 	__asm__ volatile( "ldr x0, [%0]\n\t" ::"r"(&src));
 	__asm__ volatile( "add x1, x0, 64\n\t");
-	__asm__ volatile( "add x2, x1, 64\n\t");
-	__asm__ volatile( "add x3, x2, 64\n\t");
-	__asm__ volatile( "add x4, x3, 64\n\t");
-	__asm__ volatile( "add x5, x4, 64\n\t");
-	__asm__ volatile( "add x6, x5, 64\n\t");
+	__asm__ volatile( "add x2, x0, 128\n\t");
+	__asm__ volatile( "add x3, x0, 192\n\t");
+	__asm__ volatile( "add x4, x0, 256\n\t");
+	__asm__ volatile( "add x5, x0, 320\n\t");
+	__asm__ volatile( "add x6, x0, 384\n\t");
 
 	__asm__ volatile(".loop:\n\t"
 	"ld1	{v0.16b-v3.16b}, [x0], 64\n\t"
@@ -200,80 +200,59 @@ void test_neon_assembly(
 	"st1	{v20.16b-v23.16b}, [x5], 64\n\t"
 	"st1	{v24.16b-v27.16b}, [x6], 64\n\t"
 
-	"st1	{v0.16b-v3.16b}, [x0], 64\n\t"
-	"st1	{v4.16b-v7.16b}, [x1], 64\n\t"
-	"st1	{v8.16b-v11.16b}, [x2], 64\n\t"
-	"st1	{v12.16b-v15.16b}, [x3], 64\n\t"
-	"st1	{v16.16b-v19.16b}, [x4], 64\n\t"
-	"st1	{v20.16b-v23.16b}, [x5], 64\n\t"
-	"st1	{v24.16b-v27.16b}, [x6], 64\n\t"
-
-	"st1	{v0.16b-v3.16b}, [x0], 64\n\t"
-	"st1	{v4.16b-v7.16b}, [x1], 64\n\t"
-	"st1	{v8.16b-v11.16b}, [x2], 64\n\t"
-	"st1	{v12.16b-v15.16b}, [x3], 64\n\t"
-	"st1	{v16.16b-v19.16b}, [x4], 64\n\t"
-	"st1	{v20.16b-v23.16b}, [x5], 64\n\t"
-	"st1	{v24.16b-v27.16b}, [x6], 64\n\t"
-
-	"st1	{v0.16b-v3.16b}, [x0], 64\n\t"
-	"st1	{v4.16b-v7.16b}, [x1], 64\n\t"
-	"st1	{v8.16b-v11.16b}, [x2], 64\n\t"
-	"st1	{v12.16b-v15.16b}, [x3], 64\n\t"
-	"st1	{v16.16b-v19.16b}, [x4], 64\n\t"
-	"st1	{v20.16b-v23.16b}, [x5], 64\n\t"
-	"st1	{v24.16b-v27.16b}, [x6], 64\n\t"
-
-	"st1	{v0.16b-v3.16b}, [x0], 64\n\t"
-	"st1	{v4.16b-v7.16b}, [x1], 64\n\t"
-	"st1	{v8.16b-v11.16b}, [x2], 64\n\t"
-	"st1	{v12.16b-v15.16b}, [x3], 64\n\t"
-	"st1	{v16.16b-v19.16b}, [x4], 64\n\t"
-	"st1	{v20.16b-v23.16b}, [x5], 64\n\t"
-	"st1	{v24.16b-v27.16b}, [x6], 64\n\t"
-
-			"st1	{v0.16b-v3.16b}, [x0], 64\n\t"
-			"st1	{v4.16b-v7.16b}, [x1], 64\n\t"
-			"st1	{v8.16b-v11.16b}, [x2], 64\n\t"
-			"st1	{v12.16b-v15.16b}, [x3], 64\n\t"
-			"st1	{v16.16b-v19.16b}, [x4], 64\n\t"
-			"st1	{v20.16b-v23.16b}, [x5], 64\n\t"
-			"st1	{v24.16b-v27.16b}, [x6], 64\n\t"
-
-			"st1	{v0.16b-v3.16b}, [x0], 64\n\t"
-			"st1	{v4.16b-v7.16b}, [x1], 64\n\t"
-			"st1	{v8.16b-v11.16b}, [x2], 64\n\t"
-			"st1	{v12.16b-v15.16b}, [x3], 64\n\t"
-			"st1	{v16.16b-v19.16b}, [x4], 64\n\t"
-			"st1	{v20.16b-v23.16b}, [x5], 64\n\t"
-			"st1	{v24.16b-v27.16b}, [x6], 64\n\t"
-
-			"st1	{v0.16b-v3.16b}, [x0], 64\n\t"
-			"st1	{v4.16b-v7.16b}, [x1], 64\n\t"
-			"st1	{v8.16b-v11.16b}, [x2], 64\n\t"
-			"st1	{v12.16b-v15.16b}, [x3], 64\n\t"
-			"st1	{v16.16b-v19.16b}, [x4], 64\n\t"
-			"st1	{v20.16b-v23.16b}, [x5], 64\n\t"
-			"st1	{v24.16b-v27.16b}, [x6], 64\n\t"
-
-			"st1	{v0.16b-v3.16b}, [x0], 64\n\t"
-			"st1	{v4.16b-v7.16b}, [x1], 64\n\t"
-			"st1	{v8.16b-v11.16b}, [x2], 64\n\t"
-			"st1	{v12.16b-v15.16b}, [x3], 64\n\t"
-			"st1	{v16.16b-v19.16b}, [x4], 64\n\t"
-			"st1	{v20.16b-v23.16b}, [x5], 64\n\t"
-			"st1	{v24.16b-v27.16b}, [x6], 64\n\t"
-
-			"st1	{v0.16b-v3.16b}, [x0], 64\n\t"
-			"st1	{v4.16b-v7.16b}, [x1], 64\n\t"
-			"st1	{v8.16b-v11.16b}, [x2], 64\n\t"
-			"st1	{v12.16b-v15.16b}, [x3], 64\n\t"
-			"st1	{v16.16b-v19.16b}, [x4], 64\n\t"
-			"st1	{v20.16b-v23.16b}, [x5], 64\n\t"
-			"st1	{v24.16b-v27.16b}, [x6], 64\n\t"
-
 	);
 }
+
+int test_neon_accu(
+  const uint32_t * restrict src)
+{
+	int a;
+	__asm__ volatile( "ldr x0, [%0]\n\t" ::"r"(&src));
+	__asm__ volatile( "add x1, x0, 64\n\t");
+	__asm__ volatile( "add x2, x0, 128\n\t");
+	__asm__ volatile( "add x3, x0, 192\n\t");
+	__asm__ volatile( "add x4, x0, 256\n\t");
+	__asm__ volatile( "add x5, x0, 320\n\t");
+	__asm__ volatile( "add x6, x0, 384\n\t");
+
+	__asm__ volatile(
+	"ld1	{v0.16b-v3.16b}, [x0], 64\n\t"
+	"ld1	{v4.16b-v7.16b}, [x1], 64\n\t"
+	"ld1	{v8.16b-v11.16b}, [x2], 64\n\t"
+	"ld1	{v12.16b-v15.16b}, [x3], 64\n\t"
+	"ld1	{v16.16b-v19.16b}, [x4], 64\n\t"
+	"ld1	{v20.16b-v23.16b}, [x5], 64\n\t"
+	"ld1	{v24.16b-v27.16b}, [x6], 64\n\t"
+);
+	__asm__ volatile(
+	"MLA V3.8H, V1.8H, V2.8H\n\t"
+	);
+
+	__asm__ volatile(
+	"EOR V4.16B, V28.16B, V29.16B\n\t"
+	);
+
+	__asm__ volatile(
+	"EOR V5.16B, V4.16B, V29.16B\n\t"
+	);
+
+	__asm__ volatile(
+	"SHL V6.16B, V5.16B, 1\n\t"
+	);
+
+	__asm__ volatile(
+	"SHL V7.16B, V5.16B, 2\n\t"
+	);
+
+	__asm__ volatile( // bad
+	"ROR V8.16B, V5.16B, 4\n\t"
+	);
+
+	a = 10;
+	return(a);
+
+}
+
 int main()
 {
 	Xil_ICacheEnable();
@@ -292,6 +271,7 @@ int main()
 	}
 	i = 0;
 	while(1) {
+		test_neon_accu(ptr);
 		test_neon_assembly(ptr);
 	}
 	
@@ -349,7 +329,7 @@ int main()
     end = clock();
     cpu_time_used = ((double)(end - start) * 1000000.0);
 
-    xil_printf("Scallar time: %10.f [ms]\n", cpu_time_used);
+    xil_printf("Scalar time: %10.f [ms]\n", cpu_time_used);
 
 	while(1) {}
     return 0;
