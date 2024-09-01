@@ -866,9 +866,14 @@ int main(void)
 	u32 BusWidth;
 	s8 Ch;
 	s8 SizeChar;
-
+	u32 ii;
+	s8 cmds[] = "01rwceai.t0000000000.WR01234567"; // "." is used as a marker. "t" to change a 5B Start Adddress.
+	u64 cmdsAddr;
+	
 	/* By Default, the Verbose Mode is Disabled */
 	Verbose = 0U;
+
+	Status = psu_init();
 
 	/* Set the Default Starting Address */
 	StartAddr = 0x0U;
@@ -895,6 +900,7 @@ int main(void)
 
 	/* Print the Help Menu for different operations */
 	XMt_PrintHelp();
+	ii = 0;
 
 	/* Below code will run continuously waiting for a user input */
 	while (1) {
@@ -907,9 +913,25 @@ int main(void)
 			   XMt.EccEnabled ? "ENABLED" : "DISABLED");
 		xil_printf(" Enter 'h' to print help menu\r\n");
 		xil_printf(" Enter Test Option: ");
+	
+		if (ii < strlen(cmds)) {
+			Ch = cmds[ii];
+			ii++;
+			if (Ch == 't' || Ch == 'T') {
+				cmdsAddr = hexToDecimal(cmds, ii, 10);
+				ii = ii + 10;
+				StartAddr = cmdsAddr;
+				xil_printf("%016x\r\n", StartAddr);
+				continue;
+			}
+			if (Ch == '.') {
+				continue;
+			}
+		} else {
+			/* Get Keyboard Input */
+			Ch = inbyte();
+		}
 
-		/* Get Keyboard Input */
-		Ch = inbyte();
 		if (Ch == '\r') {
 			outbyte('\n');
 		}
@@ -955,7 +977,7 @@ int main(void)
 				xil_printf("\r\nPlease select the address within DDR range\r\n");
 			}
 
-		} else if ((Ch == 'r') || (Ch == 'R')) {
+		} else if ((Ch == 'r') || 0) {
 			for (Index = 0; Index < Iter; Index++) {
 				Status = XMt_MeasureRdEye(&XMt, StartAddr,
 							  XMT_DEFAULT_TEST_LEN);
@@ -965,9 +987,30 @@ int main(void)
 				}
 			}
 
-		} else if ((Ch == 'w') || (Ch == 'W')) {
+		} else if (0 || (Ch == 'R')) {
+			for (Index = 0; Index < Iter; Index++) {
+				Status = XMt_MeasureRdEyeOpenLoop(&XMt, StartAddr,
+							  XMT_DEFAULT_TEST_LEN);
+				if (Status != XST_SUCCESS) {
+					Status = XST_FAILURE;
+					goto RETURN_PATH;
+				}
+			}
+
+		} else if ((Ch == 'w') || 0) {
 			for (Index = 0; Index < Iter; Index++) {
 				Status = XMt_MeasureWrEye(&XMt, StartAddr,
+							  XMT_DEFAULT_TEST_LEN);
+				if (Status != XST_SUCCESS) {
+					Status = XST_FAILURE;
+					goto RETURN_PATH;
+				}
+			}
+
+
+		} else if (0 || (Ch == 'W')) {
+			for (Index = 0; Index < Iter; Index++) {
+				Status = XMt_MeasureWrEyeOpenLoop(&XMt, StartAddr,
 							  XMT_DEFAULT_TEST_LEN);
 				if (Status != XST_SUCCESS) {
 					Status = XST_FAILURE;
@@ -1129,6 +1172,7 @@ int main(void)
 			goto RETURN_PATH;
 
 		}
+
 	}
 
 RETURN_PATH:

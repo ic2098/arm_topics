@@ -1096,6 +1096,8 @@ void XMt_PrintHelp(void)
 	xil_printf("   +-----+--------------------------------------------------------------+\r\n");
 	xil_printf("   | 'r' | Perform a read eye analysis test                             |\r\n");
 	xil_printf("   | 'w' | Perform a write eye analysis test                            |\r\n");
+	xil_printf("   | 'R' | Perform a read eye analysis test (Open Loop)                 |\r\n");
+	xil_printf("   | 'W' | Perform a write eye analysis test (Open Loop)                |\r\n");
 	xil_printf("   | 'c' | Perform a 2-D read eye analysis test                         |\r\n");
 	xil_printf("   | 'e' | Perform a 2-D write eye analysis test                        |\r\n");
 	xil_printf("   | 'a' | Print test start address                                     |\r\n");
@@ -1321,3 +1323,24 @@ void XMt_PrintResults(XMt_CfgData *XMtPtr)
 	}
 	xil_printf("\r\n");
 }
+
+
+u64 hexToDecimal(const char *hexString, int start, int length) {
+    u64 result = 0;
+    for (int i = start; i < start + length; i++) {
+        char hexDigit = hexString[i];
+        result = result * 16 + (hexDigit >= '0' && hexDigit <= '9' ? hexDigit - '0' :
+                                hexDigit >= 'A' && hexDigit <= 'F' ? hexDigit - 'A' + 10 :
+                                hexDigit - 'a' + 10);
+    }
+    return result;
+}
+/*
+int main() {
+    char hexString[] = "123451A2B3C4D123";
+    unsigned int number = hexToDecimal(hexString, 6, 8); // Start from index 6 (7th character) and take 8 characters
+    
+    printf("The number is: %u\n", number);
+    return 0;
+}
+*/

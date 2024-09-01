@@ -7,18 +7,21 @@ LD_SRCS += \
 ../src/lscript.ld 
 
 C_SRCS += \
+../src/psu_init.c \
 ../src/xmt_common.c \
 ../src/xmt_main.c \
 ../src/xmt_read_eye.c \
 ../src/xmt_write_eye.c 
 
 OBJS += \
+./src/psu_init.o \
 ./src/xmt_common.o \
 ./src/xmt_main.o \
 ./src/xmt_read_eye.o \
 ./src/xmt_write_eye.o 
 
 C_DEPS += \
+./src/psu_init.d \
 ./src/xmt_common.d \
 ./src/xmt_main.d \
 ./src/xmt_read_eye.d \

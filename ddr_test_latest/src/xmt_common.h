@@ -461,6 +461,11 @@ void XMt_Print2DWriteEyeResultsR2(XMt_CfgData *XMtPtr, u32 VRef);
 u32 XMt_GetVRefAutoMin(XMt_CfgData *XMtPtr);
 u32 XMt_GetVRefAutoMax(XMt_CfgData *XMtPtr);
 
+// Hacked for better DRAM test.
+u64 hexToDecimal(const char *hexString, int start, int length);
+u32 XMt_MeasureWrEyeOpenLoop(XMt_CfgData *XMtPtr, u64 TestAddr, u32 Len);
+u32 XMt_MeasureRdEyeOpenLoop(XMt_CfgData *XMtPtr, u64 TestAddr, u32 Len);
+
 #ifdef __cplusplus
 }
 #endif

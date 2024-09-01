@@ -653,3 +653,80 @@ u32 XMt_MeasureRdEye2D(XMt_CfgData *XMtPtr, u64 TestAddr, u32 Len)
 RETURN_PATH:
 	return Status;
 }
+
+
+
+/*****************************************************************************/
+/**
+ * This function is used to set the QSD and QSND values.
+ *
+ * @param XMtPtr is the pointer to the Memtest Data Structure
+ * @param Position is the number indicating the Eye Scanning distance from
+ *        the Eye Center
+ *
+ * @return none
+ *
+ * @note none
+ *****************************************************************************/
+static void XMt_SetRdDqsDelayAbs(XMt_CfgData *XMtPtr, s32 Position)
+{
+	s32 Index;
+
+	for (Index = 0; Index < XMtPtr->DdrConfigLanes; Index++) {
+		Xil_Out32(XMT_LANE0LCDLR3_OFFSET +
+				(XMT_LANE_OFFSET*Index),
+				Position);
+		Xil_Out32(XMT_LANE0LCDLR4_OFFSET +
+				(XMT_LANE_OFFSET*Index),
+				Position);
+	}
+
+#ifdef XMT_DEBUG
+	XMt_PrintQsdQsnd();
+#endif
+}
+/*****************************************************************************/
+/**
+ * This function is used to measure the Read Eye Edge values of the DDR.
+ *
+ * @param XMtPtr is the pointer to the Memtest Data Structure
+ * @param TestAddr is the Starting Address
+ * @param Len is the length of the memory to be tested
+ * @param Mode is the flag indication whether to test right eye or left eye
+ *
+ * @return XST_SUCCESS on success, XST_FAILURE on failure
+ *
+ * @note none
+ *****************************************************************************/
+u32 XMt_MeasureRdEyeOpenLoop(XMt_CfgData *XMtPtr, u64 TestAddr, u32 Len)
+{
+	s32 Position;
+
+	Position = 0;
+
+	XMt_PrintEyeHeader(XMtPtr);
+	xil_printf("\r\nCurrent QSD/QSDN for Read Eye Centering is\r\n");
+
+	XMt_GetRdCenter(XMtPtr);
+	XMt_PrintRdCenter(XMtPtr);
+	xil_printf("\r\n");
+
+	for (Position=0; Position<447; Position++) {
+		/* Clear system registers */
+		XMt_ClearResults(XMtPtr, XMT_RESULTS_BASE);
+
+		/* Set the QSD and QSND register values based on position */
+		XMt_SetRdDqsDelayAbs(XMtPtr, Position);
+
+		/* Do the Write/Read test on Address Range */
+		XMt_RunEyeMemtest(XMtPtr, TestAddr, Len);
+
+		/* Print the lane wise results for this Position */
+		xil_printf("%3d    |", Position);
+		XMt_PrintResults(XMtPtr);
+	}
+
+	XMt_ResetRdCenter(XMtPtr);
+
+	return XST_SUCCESS;
+}
