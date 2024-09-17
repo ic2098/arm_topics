@@ -3,6 +3,19 @@ Notes:
 
 https://developer.arm.com/documentation/ka001393/latest/
 
+https://developer.arm.com/documentation/ddi0595/2021-06/AArch64-Registers/DAIF--Interrupt-Mask-Bits
+
+MSR DAIF, <Xt>
+
+The PMU can also be used to count errors, for example these events :
+
+0x1A MEMORY_ERROR
+0xD0 (L1 Instruction Cache (data or tag) memory error.)
+0xD1 (L1 Data Cache (data, tag or dirty) memory error, correctable or non-correctable.)
+0xD2 (TLB memory error)
+
+Note that events 0xD0, 0xD1, 0xD2 are supplied to the external PMU event bus, so could be used to generate an interrupt in an external interrupt controller, and are also provided on the internal PMU event bus, so could be used for triggering trace for example in the ETM trace unit.
+
 Exception masking and non-maskable interrupts (NMI)
 The previous example represented a very simple case of an interrupt. It is sometimes necessary to be able to disable or mask other interrupts from overriding the currently completing exception. Both physical and virtual asynchronous exceptions can be temporarily masked and left in a pending state until unmasked and the exception is taken. This is done through masking interrupts of the same type until explicitly enabled later.
 
