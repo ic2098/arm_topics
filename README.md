@@ -1,6 +1,7 @@
 for sync. 
 Notes:
 
+M33 startup,
 https://metebalci.com/blog/demystifying-arm-cortex-m33-bare-metal-startup/
 
 
