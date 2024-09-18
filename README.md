@@ -1,6 +1,9 @@
 for sync. 
 Notes:
 
+https://metebalci.com/blog/demystifying-arm-cortex-m33-bare-metal-startup/
+
+
 https://developer.arm.com/documentation/ka001393/latest/
 
 https://developer.arm.com/documentation/ddi0595/2021-06/AArch64-Registers/DAIF--Interrupt-Mask-Bits
