@@ -75,3 +75,26 @@ stability of the VTT/VCCIO power rail
 
 
 Write Levelling
+
+
+
+
+/**
+* Perform DCache all related API test such as Xil_DCacheFlush and
+* Xil_DCacheInvalidate. This test function writes a constant value
+* to the Data array, flushes the DCache, writes a new value, then invalidates
+* the DCache.
+* 
+* @return	
+*     - 0 is returned for a pass
+*     - -1 is returned for a failure
+*/
+int Xil_TestDCacheAll(void)
+{
+	int Index;
+	int Status;
+	u32 Value;
+
+
+
+
