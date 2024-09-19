@@ -4,6 +4,9 @@ Notes:
 M33 startup,
 https://metebalci.com/blog/demystifying-arm-cortex-m33-bare-metal-startup/
 
+Disable MMU and TLB in 32b mode.
+https://adaptivesupport.amd.com/s/question/0D52E00007ECNmrSAH/how-do-i-get-rid-of-mmutbl?language=en_US
+
 
 https://developer.arm.com/documentation/ka001393/latest/
 
