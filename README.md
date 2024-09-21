@@ -1,6 +1,10 @@
 for sync. 
 Notes:
 
+AXI to ACP adaptor for A53.
+https://github.com/ikwzm/ZynqMP-ACP-Adapter/tree/master/src/main/vhdl
+
+
 M33 startup,
 https://metebalci.com/blog/demystifying-arm-cortex-m33-bare-metal-startup/
 
