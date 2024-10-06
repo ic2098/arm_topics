@@ -244,14 +244,12 @@ void set_frequency(u16 frequency) {
 }
 
 
-void measure() {
-	int KK = 149963435; // 1s at 1200M
-	for (int i=0; i<3; i++) {
-		xil_printf("Time start\n\r");
-		for (int j=0; j<KK; j++) {
-		}
-		xil_printf("%d\n\r", i);
+void measure(u16 frequency) {
+	int KK = 1499634350; // 10s at 1200M
+	xil_printf("%d, TS0\n\r", frequency);
+	for (int j=0; j<KK; j++) {
 	}
+	xil_printf("TS1\n\r");
 	return;
 }
 
@@ -265,19 +263,18 @@ int main()
     measure(0);
 
     for (u16 f=0x48; f>= 0x24; f--) {
-		xil_printf("Freq = %d\n\r", f);
         set_frequency(f);
-        measure();
+        measure(f);
     }
 
     set_frequency(0x48);
-    measure();
+    measure(0x48);
 
     set_frequency(0x24);
-    measure();
+    measure(0x24);
 
     set_frequency(0x3C);
-    measure();
+    measure(0x3C);
 
     cleanup_platform();
     return 0;
