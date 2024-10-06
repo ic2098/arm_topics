@@ -1,6 +1,10 @@
 for sync. 
 Notes:
 
+
+https://www.lirmm.fr/~virazel/COURS/index.php
+
+
 https://android.googlesource.com/kernel/msm/+/android-7.1.0_r0.2/arch/arm64/include/asm/irqflags.h
 #define local_fiq_enable()	asm("msr	daifclr, #1" : : : "memory")
 #define local_fiq_disable()	asm("msr	daifset, #1" : : : "memory")
