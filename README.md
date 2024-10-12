@@ -1,6 +1,10 @@
 for sync. 
 Notes:
 
+FSBL:
+![image](https://github.com/user-attachments/assets/5bff481f-46e5-4de5-a874-596fdbd56b7d)
+
+
 
 https://www.lirmm.fr/~virazel/COURS/index.php
 
